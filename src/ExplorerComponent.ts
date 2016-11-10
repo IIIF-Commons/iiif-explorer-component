@@ -58,7 +58,7 @@ namespace IIIFComponents {
 
             $.views.helpers({
                   itemClass: function(id) {
-                      return id === this._selected.id
+                      return this._selected && id === this._selected.id
                           ? 'explorer-item selected'
                           : 'explorer-item';
                   }.bind(this)
@@ -91,6 +91,7 @@ namespace IIIFComponents {
 
                         self.contents('.explorer-item')
                             .on('click', 'a.explorer-folder-link', function() {
+                                that._selected = null;
                                 that._switchToFolder(self.data);
                                 return false;
                             })
