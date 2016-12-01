@@ -1,4 +1,18 @@
 // iiif-explorer-component v1.0.1 https://github.com/viewdir/iiif-explorer-component#readme
+interface JQuery {
+    // jsviews
+    link: any;
+    render: any;
+}
+
+interface JQueryStatic {
+    // jsviews
+    observable: any;
+    templates: any;
+    views: any;
+    view: any;
+}
+
 declare namespace IIIFComponents {
     class ExplorerComponent extends _Components.BaseComponent {
         options: IExplorerComponentOptions;
