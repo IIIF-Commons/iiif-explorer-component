@@ -1,5 +1,7 @@
 // iiif-explorer-component v1.0.1 https://github.com/viewdir/iiif-explorer-component#readme
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.iiifExplorerComponent = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function (global){
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -10,10 +12,11 @@ var IIIFComponents;
     var ExplorerComponent = (function (_super) {
         __extends(ExplorerComponent, _super);
         function ExplorerComponent(options) {
-            _super.call(this, options);
-            this._parents = [];
-            this._init();
-            this._resize();
+            var _this = _super.call(this, options) || this;
+            _this._parents = [];
+            _this._init();
+            _this._resize();
+            return _this;
         }
         ExplorerComponent.prototype._init = function () {
             var success = _super.prototype._init.call(this);
@@ -91,7 +94,7 @@ var IIIFComponents;
                             .on('click', 'a.explorer-item-link', function () {
                             that._selected = self.data;
                             that._draw();
-                            that._emit(ExplorerComponent.Events.EXPLORER_NODE_SELECTED, self.data);
+                            that.fire(ExplorerComponent.Events.EXPLORER_NODE_SELECTED, self.data);
                             return false;
                         });
                     },
@@ -156,17 +159,17 @@ var IIIFComponents;
                     else {
                         resolve([parentManifest, node]);
                     }
-                }).catch(reject);
+                })["catch"](reject);
             });
         };
-        ExplorerComponent.prototype.databind = function () {
-            var root = this.options.helper.iiifResource;
+        ExplorerComponent.prototype.set = function () {
+            var root = this.options.data.helper.iiifResource;
             if (root.getProperty('within')) {
                 var that_1 = this;
                 this._followWithin(root).then(function (parents) {
                     that_1._parents = parents;
                     var start = parents.pop();
-                    while (!start.isCollection()) {
+                    while (start && !start.isCollection()) {
                         start = parents.pop();
                     }
                     that_1._switchToFolder(start);
@@ -179,7 +182,7 @@ var IIIFComponents;
                 this._selected = root;
             }
         };
-        ExplorerComponent.prototype._getDefaultOptions = function () {
+        ExplorerComponent.prototype.data = function () {
             return {
                 helper: null,
                 topRangeIndex: 0,
@@ -192,30 +195,28 @@ var IIIFComponents;
     }(_Components.BaseComponent));
     IIIFComponents.ExplorerComponent = ExplorerComponent;
 })(IIIFComponents || (IIIFComponents = {}));
-var IIIFComponents;
 (function (IIIFComponents) {
     var ExplorerComponent;
     (function (ExplorerComponent) {
         var Events = (function () {
             function Events() {
             }
-            Events.TEST = 'test';
-            Events.EXPLORER_NODE_SELECTED = 'explorerNodeSelected';
             return Events;
         }());
+        Events.EXPLORER_NODE_SELECTED = 'explorerNodeSelected';
         ExplorerComponent.Events = Events;
     })(ExplorerComponent = IIIFComponents.ExplorerComponent || (IIIFComponents.ExplorerComponent = {}));
 })(IIIFComponents || (IIIFComponents = {}));
-(function (w) {
-    if (!w.IIIFComponents) {
-        w.IIIFComponents = IIIFComponents;
+(function (g) {
+    if (!g.IIIFComponents) {
+        g.IIIFComponents = IIIFComponents;
     }
     else {
-        w.IIIFComponents.ExplorerComponent = IIIFComponents.ExplorerComponent;
+        g.IIIFComponents.ExplorerComponent = IIIFComponents.ExplorerComponent;
     }
-})(window);
+})(global);
 
 
-
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}]},{},[1])(1)
 });

@@ -17,10 +17,11 @@
   },
   "homepage": "https://github.com/viewdir/iiif-explorer-component#readme",
   "devDependencies": {
-    "base-component": "viewdir/base-component#v1.0.8",
+    "base-component": "viewdir/base-component#tsupdate",
     "gulp": "^3.9.1",
-    "gulp-tasks": "viewdir/gulp-tasks#v1.0.3",
-    "manifold": "viewdir/manifold"
+    "gulp-tasks": "viewdir/gulp-tasks#tsupdate",
+    "manifold": "viewdir/manifold",
+    "typings": "^2.1.0"
   },
   "dependencies": {
     

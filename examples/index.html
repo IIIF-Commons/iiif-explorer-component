@@ -38,8 +38,10 @@
                 helper = h;
 
                 component = new IIIFComponents.ExplorerComponent({
-                    element: "#explorer",
-                    helper: h
+                    target: document.querySelector('#explorer'),
+                    data: {
+                        helper: h
+                    }
                 });
 
                 component.on('explorerNodeSelected', function(args) {
@@ -48,7 +50,7 @@
                     alert('selected: ' + Manifesto.TranslationCollection.getValue(node.getLabel()));
                 });
 
-                component.databind();
+                component.set();
 
             }).catch(function(e) {
                 console.error(e);

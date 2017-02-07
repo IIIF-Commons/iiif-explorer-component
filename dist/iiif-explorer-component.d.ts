@@ -1,12 +1,9 @@
 // iiif-explorer-component v1.0.1 https://github.com/viewdir/iiif-explorer-component#readme
 interface JQuery {
-    // jsviews
     link: any;
     render: any;
 }
-
 interface JQueryStatic {
-    // jsviews
     observable: any;
     templates: any;
     views: any;
@@ -27,14 +24,13 @@ declare namespace IIIFComponents {
         gotoBreadcrumb(node: Manifesto.Collection): void;
         protected _switchToFolder(node: Manifesto.Collection): void;
         protected _followWithin(node: Manifesto.IIIFResource): Promise<Manifesto.IIIFResource[]>;
-        databind(): void;
-        protected _getDefaultOptions(): IExplorerComponentOptions;
+        set(): void;
+        data(): Object;
         protected _resize(): void;
     }
 }
 declare namespace IIIFComponents.ExplorerComponent {
     class Events {
-        static TEST: string;
         static EXPLORER_NODE_SELECTED: string;
     }
 }

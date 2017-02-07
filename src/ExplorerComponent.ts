@@ -3,7 +3,7 @@ namespace IIIFComponents {
 
         public options: IExplorerComponentOptions;
         private _$view: JQuery;
-        private _selected: Manifesto.IIIFResource;
+        private _selected: Manifesto.IIIFResource | null;
         private _current: Manifesto.IIIFResource;
         private _parents: Manifesto.IIIFResource[] = [];
 
@@ -57,7 +57,7 @@ namespace IIIFComponents {
             });
 
             $.views.helpers({
-                  itemClass: function(id) {
+                  itemClass: function(id: string) {
                       return this._selected && id === this._selected.id
                           ? 'explorer-item selected'
                           : 'explorer-item';
@@ -98,7 +98,7 @@ namespace IIIFComponents {
                             .on('click', 'a.explorer-item-link', function() {
                                 that._selected = self.data;
                                 that._draw();
-                                that._emit(ExplorerComponent.Events.EXPLORER_NODE_SELECTED, self.data);
+                                that.fire(ExplorerComponent.Events.EXPLORER_NODE_SELECTED, self.data);
                                 return false;
                             });
                     },
@@ -170,14 +170,14 @@ namespace IIIFComponents {
             });
         }
 
-        public databind(): void {
-            let root: Manifesto.IIIFResource = this.options.helper.iiifResource;
+        public set(): void {
+            let root: Manifesto.IIIFResource = this.options.data.helper.iiifResource;
             if (root.getProperty('within')) {
                 let that = this;
                 this._followWithin(root).then(function (parents: Manifesto.IIIFResource[]) {
                     that._parents = parents;
                     let start = parents.pop();
-                    while (!start.isCollection()) {
+                    while (start && !start.isCollection()) {
                         start = parents.pop();
                     }
                     that._switchToFolder(<Manifesto.Collection>start);
@@ -190,8 +190,8 @@ namespace IIIFComponents {
             }
         }
 
-        protected _getDefaultOptions(): IExplorerComponentOptions {
-            return <IExplorerComponentOptions>{
+        public data(): Object {
+            return {
                 helper: null,
                 topRangeIndex: 0,
                 treeSortType: Manifold.TreeSortType.NONE
@@ -206,15 +206,14 @@ namespace IIIFComponents {
 
 namespace IIIFComponents.ExplorerComponent {
     export class Events {
-        static TEST: string = 'test';
         static EXPLORER_NODE_SELECTED: string = 'explorerNodeSelected';
     }
 }
 
-(function(w) {
-    if (!w.IIIFComponents){
-        w.IIIFComponents = IIIFComponents;
+(function(g:any) {
+    if (!g.IIIFComponents){
+        g.IIIFComponents = IIIFComponents;
     } else {
-        w.IIIFComponents.ExplorerComponent = IIIFComponents.ExplorerComponent;
+        g.IIIFComponents.ExplorerComponent = IIIFComponents.ExplorerComponent;
     }
-})(window);
+})(global);
