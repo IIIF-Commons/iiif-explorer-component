@@ -1,13 +1,13 @@
 namespace IIIFComponents {
     export class ExplorerComponent extends _Components.BaseComponent {
 
-        public options: IExplorerComponentOptions;
+        public options: _Components.IBaseComponentOptions;
         private _$view: JQuery;
         private _selected: Manifesto.IIIFResource | null;
         private _current: Manifesto.IIIFResource;
         private _parents: Manifesto.IIIFResource[] = [];
 
-        constructor(options: IExplorerComponentOptions) {
+        constructor(options: _Components.IBaseComponentOptions) {
             super(options);
 
             this._init();
@@ -190,8 +190,8 @@ namespace IIIFComponents {
             }
         }
 
-        public data(): Object {
-            return {
+        public data(): IExplorerComponentData {
+            return <IExplorerComponentData> {
                 helper: null,
                 topRangeIndex: 0,
                 treeSortType: Manifold.TreeSortType.NONE
