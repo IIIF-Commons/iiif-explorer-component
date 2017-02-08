@@ -1,4 +1,4 @@
-// iiif-explorer-component v1.0.1 https://github.com/viewdir/iiif-explorer-component#readme
+// iiif-explorer-component v1.0.2 https://github.com/viewdir/iiif-explorer-component#readme
 interface JQuery {
     link: any;
     render: any;
