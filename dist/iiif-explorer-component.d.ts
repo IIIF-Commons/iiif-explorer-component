@@ -1,4 +1,5 @@
 // iiif-explorer-component v1.0.2 https://github.com/viewdir/iiif-explorer-component#readme
+/// <reference path="../node_modules/typescript/lib/lib.es6.d.ts" />
 interface JQuery {
     link: any;
     render: any;

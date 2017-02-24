@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>component-boilerplate: test</title>
+    <title>iiif-explorer-component: test</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/iiif-explorer-component.css" />
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsviews/0.9.76/jsviews.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/3.2.2/es6-promise.min.js"></script>
-    <script src="js/base-component.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.min.js"></script>
+    <script src="js/base-component.js"></script>
     <script src="js/iiif-explorer-component.js"></script>
     <script src="js/manifold.bundle.js"></script>
 </head>
@@ -44,8 +44,7 @@
                     }
                 });
 
-                component.on('explorerNodeSelected', function(args) {
-                    var node = args[0];
+                component.on('explorerNodeSelected', function(node) {
                     console.log('selected', node);
                     alert('selected: ' + Manifesto.TranslationCollection.getValue(node.getLabel()));
                 });

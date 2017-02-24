@@ -124,7 +124,9 @@ namespace IIIFComponents {
                 // Alphabetical
                 let aLabel = Manifesto.TranslationCollection.getValue(a.getLabel());
                 let bLabel = Manifesto.TranslationCollection.getValue(b.getLabel());
-                return aLabel < bLabel ? -1 : 1;
+                if (aLabel && bLabel) {
+                    return aLabel < bLabel ? -1 : 1;
+                }
             }
             // Collections first
             return bType.indexOf('collection') - aType.indexOf('collection');
