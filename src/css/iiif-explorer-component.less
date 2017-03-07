@@ -16,11 +16,15 @@
       background-repeat: no-repeat;
     }
     .explorer-breadcrumb {
-      background-image: url('@{img-path}folder-open.png');
+      background-image: data-uri('@{img-path}folder-open.png');
       background-position: 0 center;
     }
-    .explorer-folder { background-image: url('@{img-path}folder-closed.png'); }
-    .explorer-resource { background-image: url('@{img-path}resource.png'); }
+    .explorer-folder { 
+        background-image: data-uri('@{img-path}folder-closed.png');
+    }
+    .explorer-resource { 
+        background-image: data-uri('@{img-path}resource.png');
+    }
 
     .selected {
         background-color: #000;
